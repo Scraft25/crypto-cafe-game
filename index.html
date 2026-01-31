@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoCafe Tycoon</title>
+</head>
+<body>
+  <div id="particles"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="neon-text">☕ CryptoCafe Tycoon</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-label" data-i18n="wallet">Wallet</span>
+          <span class="stat-value" id="walletDisplay">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label" data-i18n="production">Producción Total</span>
+          <span class="stat-value" id="productionDisplay">0/s</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label" data-i18n="prestigeLevel">Prestige Level</span>
+          <span class="stat-value" id="prestigeLevelDisplay">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label" data-i18n="nextPrestige">Siguiente Prestige</span>
+          <span class="stat-value" id="prestigeGoalDisplay">10000</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Fila de máquinas desbloqueables -->
+    <div class="machines-row" id="machinesRow"></div>
+
+    <!-- Máquina central (clickeable) -->
+    <div class="machine-container">
+      <div class="machine-name" id="machineName">☕ Café</div>
+      <div class="machine" id="espressoMachine">
+        <div class="machine-glow"></div>
+        <div class="machine-emoji" id="machineEmoji">☕</div>
+        <div class="click-text" data-i18n="clickMe">¡Haz Click!</div>
+      </div>
+      <div class="machine-stats">
+        <span data-i18n="clickPower">Poder Click</span>: <span id="currentClickPower">1</span> | 
+        <span data-i18n="production">Producción</span>: <span id="currentMachineProduction">0/s</span>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="action-buttons">
+      <button class="btn btn-info" id="tutorialBtn">
+        <span data-i18n="tutorial">📚 Tutorial</span>
+      </button>
+      <button class="btn btn-boost" id="turboBtn" style="display:none;">
+        <span>⚡ Turbo</span>
+      </button>
+      <button class="btn btn-share" id="shareBtn">
+        <span data-i18n="share">🔗 Compartir</span>
+      </button>
+      <button class="btn btn-prestige" id="prestigeBtn" disabled>
+        <span data-i18n="prestige">🌙 Moon Landing</span>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="upgrades">⚡ <span data-i18n="tabUpgrades">Upgrades</span></button>
+      <button class="tab-btn" data-tab="skins">🎨 <span data-i18n="tabSkins">Skins</span></button>
+      <button class="tab-btn" data-tab="machines">🏭 <span data-i18n="tabMachines">Máquinas</span></button>
+      <button class="tab-btn" data-tab="achievements">🏆 <span data-i18n="tabAchievements">Logros</span></button>
+      <button class="tab-btn" data-tab="settings">⚙️ <span data-i18n="tabSettings">Config</span></button>
+    </div>
+
+    <!-- Contenido tabs -->
+    <div class="tab-content">
+      <!-- Upgrades de la máquina actual -->
+      <div class="tab-panel active" id="upgrades">
+        <h2 id="upgradesTitle">⚡ Mejoras de ☕ Café</h2>
+        <div id="upgradesList"></div>
+      </div>
+
+      <!-- Skins de la máquina actual -->
+      <div class="tab-panel" id="skins">
+        <h2 id="skinsTitle">🎨 Skins de ☕ Café</h2>
+        <div id="skinsList"></div>
+      </div>
+
+      <!-- Lista de todas las máquinas -->
+      <div class="tab-panel" id="machines">
+        <h2 data-i18n="machinesTitle">🏭 Máquinas Disponibles</h2>
+        <div id="machinesList"></div>
+      </div>
+
+      <!-- Logros -->
+      <div class="tab-panel" id="achievements">
+        <h2 data-i18n="achievementsTitle">🏆 Logros</h2>
+        <div id="achievementsList"></div>
+      </div>
+
+      <!-- Settings -->
+      <div class="tab-panel" id="settings">
+        <h2 data-i18n="settingsTitle">⚙️ Configuración</h2>
+        <div class="settings-panel">
+          <div class="setting-item">
+            <label data-i18n="soundLabel">Sonido</label>
+            <button class="btn btn-toggle" id="soundToggle">ON</button>
+          </div>
+          <div class="setting-item">
+            <label data-i18n="languageLabel">Idioma</label>
+            <button class="btn btn-toggle" id="langToggle">ES</button>
+          </div>
+          <div class="setting-item">
+            <button class="btn btn-action" id="saveBtn" data-i18n="saveBtn">💾 Guardar</button>
+            <button class="btn btn-action" id="exportBtn" data-i18n="exportBtn">📤 Exportar</button>
+          </div>
+          <div class="setting-item">
+            <button class="btn btn-action" id="importBtn" data-i18n="importBtn">📥 Importar</button>
+            <button class="btn btn-danger" id="resetBtn" data-i18n="resetBtn">onclick="resetGame()"🗑️ Reset Total</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modales -->
+  <div class="modal" id="tutorialModal">
+    <div class="modal-content">
+      <h2 data-i18n="tutorialTitle">🎮 Tutorial Interactivo</h2>
+      <div id="tutorialSteps"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="tutorialNextBtn" data-i18n="next">Siguiente</button>
+        <button class="btn btn-secondary" id="tutorialSkipBtn" data-i18n="skip">Saltar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="offlineModal">
+    <div class="modal-content">
+      <h2 data-i18n="welcomeBack">¡Bienvenido de vuelta!</h2>
+      <p data-i18n="offlineEarnings">Mientras estabas fuera ganaste:</p>
+      <div class="offline-amount" id="offlineAmount">0</div>
+      <button class="btn btn-primary" id="offlineCloseBtn" data-i18n="collect">Recolectar</button>
+    </div>
+  </div>
+
+  <div id="toastContainer"></div>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
